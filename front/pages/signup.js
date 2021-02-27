@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react'
 import { Form, Input, Checkbox, Button } from 'antd'
+
 const Signup = () => {
   const [passwordCheck, setPasswordCheck] = useState('')
   const [term, setTerm] = useState(false)
