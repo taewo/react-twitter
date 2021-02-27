@@ -18,20 +18,21 @@ const Signup = () => {
   const [nick, onChangeNick] = useInput('')
   const [password, onChangePassword] = useInput('')
   
-  const onSubmit = (e) => {
+  const onSubmit = useCallback((e) => {
     console.log({id, nick, password, passwordCheck, term})
     if (password !== passwordCheck) return setPasswordError(true)
     if (!termError) return setTermError(true)
-  }
+  }, [password, passwordCheck, term])
 
-  const onChangePasswordChk = (e) => {
+  const onChangePasswordChk = useCallback((e) => {
     setPasswordError(e.target.value !== password)
     setPasswordCheck(e.target.value)
-  }
-  const onChangeTerm = (e) => {
+  }, [password])
+
+  const onChangeTerm = useCallback((e) => {
     setTermError(false)
-    setTerm(e.target.value)
-  }
+    setTerm(e.target.checked)
+  }, [])
 
   return (
     <>
@@ -58,7 +59,7 @@ const Signup = () => {
           {passwordError && <div style={{ color: 'red' }}>비밀번호가 일치하지 않습니다.</div>}
         </div>
         <div>
-          <Checkbox name="user-term" value={term} onChange={onChangeTerm}>약관에 동의합니다.</Checkbox>
+          <Checkbox name="user-term" checked={term} onChange={onChangeTerm}>약관에 동의합니다.</Checkbox>
           {termError && <div style={{ color: 'red' }}>약관에 동의하셔야 합니다.</div>}
         </div>
         <div style={{ marginTop: 10 }}>
