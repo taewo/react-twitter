@@ -1,6 +1,8 @@
 import React from 'react'
 import Head from 'next/head'
+import PropTypes from 'prop-types'
 import AppLayout from '../components/AppLayout'
+
 
 const Main = ({ Component }) => {
   return (
@@ -14,6 +16,10 @@ const Main = ({ Component }) => {
       </AppLayout>
     </>
   )
+}
+
+Main.propTypes = {
+  Component: PropTypes.elementType
 }
 
 export default Main
