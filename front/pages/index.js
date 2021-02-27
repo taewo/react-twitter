@@ -2,8 +2,6 @@ import React from 'react'
 import { Avatar, Button, Input, Form, Card } from 'antd'
 import Icon from '@ant-design/icons';
 
-
-
 const dummy = {
   isLoggedIn: true,
   imagePaths: [],
