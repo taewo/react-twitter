@@ -3,6 +3,14 @@ import Link from 'next/link'
 import PropTypes from 'prop-types'
 import { Menu, Input, Button } from 'antd'
 
+const dummy = {
+  nickname: 'taewo',
+  Post: [],
+  Followings: [],
+  Followers: [],
+  isLoggedIn: false
+}
+
 const AppLayout = ({ children }) => {
   return (
     <div>
