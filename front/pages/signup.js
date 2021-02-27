@@ -1,28 +1,29 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import { Form, Input, Checkbox, Button } from 'antd'
 const Signup = () => {
-  const [id, setId] = useState('')
-  const [nick, setNick] = useState('')
-  const [password, setPassword] = useState('')
   const [passwordCheck, setPasswordCheck] = useState('')
   const [term, setTerm] = useState(false)
   const [passwordError, setPasswordError] = useState(false)
   const [termError, setTermError] = useState(false)
+  
+  const useInput = (initValue = null) => {
+    const [value, setter] = useState(initValue)
+    const handler = useCallback(e => {
+      setter(e.target.value)
+    }, [])
+    return [value, handler]
+  }
 
+  const [id, onChangeId] = useInput('')
+  const [nick, onChangeNick] = useInput('')
+  const [password, onChangePassword] = useInput('')
+  
   const onSubmit = (e) => {
     console.log({id, nick, password, passwordCheck, term})
     if (password !== passwordCheck) return setPasswordError(true)
     if (!termError) return setTermError(true)
   }
-  const onChangeId = (e) => {
-    setId(e.target.value)
-  }
-  const onChangeNick = (e) => {
-    setNick(e.target.value)
-  }
-  const onChangePassword = (e) => {
-    setPassword(e.target.value)
-  }
+
   const onChangePasswordChk = (e) => {
     setPasswordError(e.target.value !== password)
     setPasswordCheck(e.target.value)
