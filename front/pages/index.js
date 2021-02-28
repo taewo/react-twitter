@@ -1,7 +1,8 @@
-import React from 'react'
-import { Avatar, Button, Input, Form, Card } from 'antd'
+import React, { useEffect } from 'react'
 import PostForm from '../components/PostForm'
 import PostCard from '../components/PostCard'
+import { useDispatch } from 'react-redux'
+import { loginAction, logoutAction } from '../reducers/user'
 
 const dummy = {
   isLoggedIn: true,
@@ -17,6 +18,11 @@ const dummy = {
 }
 
 const Home = () => {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(loginAction)
+    dispatch(logoutAction)
+  }, [])
   return (
     <div>
       {dummy.isLoggedIn && <PostForm />}
