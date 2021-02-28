@@ -1,5 +1,13 @@
 export const initialState = {
-  mainPosts: []
+  mainPosts: [{
+    User: {
+      id: 1,
+      nickname: '조르바',
+    },
+    content: '첫 번째 게시글',
+    img: 'https://traveler.marriott.com/wp-content/uploads/2018/09/GI_931952270_SeongsanIlchulbong.jpg'
+  }],
+  imagePaths: []
 }
 
 const ADD_POST = 'ADD_POST'
