@@ -17,7 +17,7 @@ const logoutAction = {
   type: LOG_OUT
 }
 
-export default reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case loginAction: {
       return {
@@ -33,5 +33,12 @@ export default reducer = (state = initialState, action) => {
         user: null
       }
     }
+    default: {
+      return {
+        ...state
+      }
+    }
   }
 }
+
+export default reducer

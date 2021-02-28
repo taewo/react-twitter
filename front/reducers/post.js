@@ -20,7 +20,7 @@ const addDummy = {
   }
 }
 
-export default reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_POST: {
       return {
@@ -33,7 +33,12 @@ export default reducer = (state = initialState, action) => {
         mainPosts: [action.data, ...state.mainPosts]
       }
     }
-    default:
-      break;
+    default: {
+      return {
+        ...state
+      }
+    }
   }
 }
+
+export default reducer
