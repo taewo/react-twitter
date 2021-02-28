@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import PostForm from '../components/PostForm'
 import PostCard from '../components/PostCard'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { loginAction, logoutAction } from '../reducers/user'
 
 const dummy = {
@@ -19,6 +19,8 @@ const dummy = {
 
 const Home = () => {
   const dispatch = useDispatch()
+  const user = useSelector(state => state.user)
+  console.log(123, user)
   useEffect(() => {
     dispatch(loginAction)
     dispatch(logoutAction)
