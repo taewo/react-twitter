@@ -1,8 +1,11 @@
 import React from 'react'
 import Head from 'next/head'
 import PropTypes from 'prop-types'
+import withRedux from 'next-redux-wrapper'
 import AppLayout from '../components/AppLayout'
-
+import { Provider } from 'react-redux'
+import rootReducer from '../reducers'
+import { createStore } from 'redux'
 
 const Main = ({ Component }) => {
   return (
@@ -22,4 +25,8 @@ Main.propTypes = {
   Component: PropTypes.elementType
 }
 
-export default Main
+export default withRedux((initialState, options) => {
+  const store = createStore(rootReducer, initialState)
+  // 여기서 store 커스터마이징
+  return store
+})(Main)
