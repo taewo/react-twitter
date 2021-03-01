@@ -2,15 +2,21 @@ import React, { useCallback } from 'react'
 import Link from 'next/Link'
 import { Input, Button, Form } from 'antd'
 import { useInput } from '../pages/signup'
-import { useDispatch } from 'react-redux'
-import { loginAction } from '../reducers/user'
+import { useDispatch, useSelector } from 'react-redux'
+import { LOG_IN_REQUEST } from '../reducers/user'
 
 const LoginForm = () => {
   const [id, onChangeId] = useInput('')
   const [password, onChangePassword] = useInput('')
+  const { isLoggingIn } = useSelector(state => state.user)
   const dispatch = useDispatch()
   const onSubmitForm = useCallback(() => {
-    dispatch(loginAction)
+    dispatch({
+      type: LOG_IN_REQUEST,
+      data: {
+        id, password
+      }
+    })
   }, [id, password])
 
   return (
@@ -26,7 +32,7 @@ const LoginForm = () => {
         <Input name="user-password" type="password" value={password} onChange={onChangePassword} required />
       </div>
       <div style={{ marginTop: '10px' }}>
-        <Button type="primary" htmlType="submit" loading={false}>로그인</Button>
+        <Button type="primary" htmlType="submit" loading={isLoggingIn}>로그인</Button>
         <Link href="/signup"><Button>회원가입</Button></Link>
       </div>
     </Form>
