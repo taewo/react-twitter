@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card, Avatar, Button } from 'antd'
 import PropTypes from 'prop-types'
-import Icon from '@ant-design/icons';
+import Icon, { EllipsisOutlined, HeartOutlined, MessageOutlined, RetweetOutlined } from '@ant-design/icons';
 
 const PostCard = ({ post }) => {
   console.log('post-', post)
@@ -10,10 +10,10 @@ const PostCard = ({ post }) => {
       key={+post.createdAt}
       cover={post.img && <img alt="example" src={post.img} />}
       actions={[
-        <Icon type="retweet" key="retweet" />,
-        <Icon type="heart" key="heart" />,
-        <Icon type="message" key="message" />,
-        <Icon type="ellisis" key="ellisis" />
+        <RetweetOutlined />,
+        <HeartOutlined />,
+        <MessageOutlined />,
+        <EllipsisOutlined />
       ]}
       extra={<Button>팔로우</Button>}>
       <Card.Meta
