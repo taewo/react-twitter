@@ -1,4 +1,4 @@
-// import axios from 'axios'
+import axios from 'axios'
 import { all, call, delay, fork, put, takeEvery } from 'redux-saga/effects';
 import { loginAction, LOG_IN_FAILURE, LOG_IN_REQUEST, LOG_IN_SUCCESS, SIGN_UP_REQUEST, SIGN_UP_SUCCESS, SIGN_UP_FAILURE } from '../reducers/user'
 
@@ -9,7 +9,8 @@ function loginAPI() {
 
 function* login() {
   try {
-    yield call(loginAPI)
+    // yield call(loginAPI)
+    yield delay(2000)
     yield put({ // put은 dispatch 동일
       type: LOG_IN_SUCCESS
     })
@@ -22,7 +23,7 @@ function* login() {
 }
 
 function* watchLogin() {
-  yield takeEvery(SIGN_UP_REQUEST, login)
+  yield takeEvery(LOG_IN_REQUEST, login)
 }
 
 function signUpAPI() {
@@ -32,14 +33,17 @@ function signUpAPI() {
 
 function* signUp() {
   try {
-    yield call(signUpAPI)
+    yield delay(2000)
+    // yield call(signUpAPI) //  call은 비동기처리, fork는 동기처리
+    throw new Error('에러러러ㅓ러에러러')
     yield put({ // put은 dispatch 동일
       type: SIGN_UP_SUCCESS
     })
   } catch (e) {
-    console.error(e)
+    console.log('eeeee', e)
     yield put({
-      type: SIGN_UP_FAILURE
+      type: SIGN_UP_FAILURE,
+      error: e
     })
   }
 }
