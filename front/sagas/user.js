@@ -26,16 +26,14 @@ function* watchLogin() {
   yield takeEvery(LOG_IN_REQUEST, login)
 }
 
-function signUpAPI() {
+function signUpAPI(signUpData) {
   // 서버에 요청을 보내는 부분
-  return axios.post('/login');
+  return axios.post('http://localhost:3065/api/user/', signUpData);
 }
 
-function* signUp() {
+function* signUp(action) {  //  action에는 { type: 액션타입, data: {...} } 이러한 형태로 들어온다
   try {
-    yield delay(2000)
-    // yield call(signUpAPI) //  call은 비동기처리, fork는 동기처리
-    throw new Error('에러러러ㅓ러에러러')
+    yield call(signUpAPI, action.data) //  call은 비동기처리, fork는 동기처리
     yield put({ // put은 dispatch 동일
       type: SIGN_UP_SUCCESS
     })
