@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcrypt')
 const db = require('../models')
+const passport = require('passport')
 
 router.get('/', (req, res) => {
 
@@ -40,7 +41,21 @@ router.post('/logout', (req, res) => {
 })
 
 router.post('/login', (req, res) => {
-  
+  passport.authenticate('local', (err, user, info) => { //  err, user, info는 passport에서 오는 파라미터 값
+    if (err) {
+      console.error(err)
+      return next(err)
+    }
+    if (info) {
+      return res.status(401).send(info.reason)
+    }
+    return req.login(user, loginError => {
+      if (loginError) return next(loginError)
+      const filteredUser = Object.assign({}, user)
+      delete filteredUser.password
+      return res.json(filteredUser)
+    })
+  })
 })
 
 router.get('/:id/follow', (req, res) => {
