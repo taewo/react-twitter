@@ -42,7 +42,7 @@ router.post('/logout', (req, res) => {
   res.send('logout 성공')
 })
 
-router.post('/login', (req, res) => {
+router.post('/login', (req, res, next) => {
   passport.authenticate('local', (err, user, info) => { //  err, user, info는 passport에서 오는 파라미터 값
     if (err) {
       console.error(err)
@@ -51,13 +51,13 @@ router.post('/login', (req, res) => {
     if (info) {
       return res.status(401).send(info.reason)
     }
-    return req.login(user, loginError => {
+    return req.login(user, loginError => {  //  req.login에서 passport/index.js의 passport serializeUser가 실행된다
       if (loginError) return next(loginError)
       const filteredUser = Object.assign({}, user)
       delete filteredUser.password
       return res.json(filteredUser)
     })
-  })
+  })(req, res, next)
 })
 
 router.get('/:id/follow', (req, res) => {
