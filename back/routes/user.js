@@ -37,7 +37,9 @@ router.get('/:id', (req, res) => {
 })
 
 router.post('/logout', (req, res) => {
-  
+  req.logout()
+  req.session.destory()
+  res.send('logout 성공')
 })
 
 router.post('/login', (req, res) => {
