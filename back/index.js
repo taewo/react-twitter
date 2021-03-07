@@ -20,7 +20,10 @@ passportConfig()
 app.use(morgan('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(cors( ))
+app.use(cors({
+  origin: true,
+  credentials: true
+}))
 app.use(cookieParser(process.env.COOKIE_SECRET))
 app.use(expressSession({
   resave: false,  //  매번 세션 강제 저장
@@ -29,7 +32,8 @@ app.use(expressSession({
   cookie: {
     httpOnly: true,  //  js에서 쿠키 접근 불가
     secure: false //  https를 쓸때 true
-  }
+  },
+  name: 'taewo' //  브라우져에 저장되는 쿠키의 이름
 }))
 app.use(passport.initialize())
 app.use(passport.session())
