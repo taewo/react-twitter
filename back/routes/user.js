@@ -43,7 +43,7 @@ router.get('/:id', (req, res) => {
 
 router.post('/logout', (req, res) => {
   req.logout()
-  req.session.destory()
+  req.session.destroy()
   res.send('logout 성공')
 })
 
