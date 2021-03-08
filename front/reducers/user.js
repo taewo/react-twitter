@@ -78,12 +78,23 @@ export default (state = initialState, action) => {
         me: null,
       }
     }
+
+    
     case LOG_OUT_REQUEST: {
       return {
         ...state,
-        me: null,
+        isLoggingOut: true
       }
     }
+    case LOG_OUT_SUCCESS: {
+      return {
+        ...state,
+        isLoggingOut: false,
+        me: null
+      }
+    }
+
+
     case SIGN_UP_REQUEST: {
       return {
         ...state,
@@ -104,6 +115,23 @@ export default (state = initialState, action) => {
         ...state,
         isSigningUp: false,
         signUpErrorReason: action.error,
+      }
+    }
+
+    case LOAD_USER_REQUEST: {
+      return {
+        ...state,
+      }
+    }
+    case LOAD_USER_SUCCESS: {
+      return {
+        ...state,
+        me: action.data
+      }
+    }
+    case LOAD_USER_FAILURE: {
+      return {
+        ...state,
       }
     }
     default: {
