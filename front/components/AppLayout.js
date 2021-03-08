@@ -1,13 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Link from 'next/link'
 import PropTypes from 'prop-types'
 import { Menu, Input, Button, Row, Col, Card, Avatar, Form } from 'antd'
 import LoginForm from './LoginForm'
 import UserProfile from './UserProfile'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 const AppLayout = ({ children }) => {
-  const { isLoggedIn } = useSelector(state => state.user)
+  const { me } = useSelector(state => state.user)
   return (
     <div>
       <Menu mode="horizontal">
@@ -19,7 +19,7 @@ const AppLayout = ({ children }) => {
       </Menu>
       <Row gutter={10}>
         <Col xs={24} md={6}>
-          {isLoggedIn
+          {me
             ? <UserProfile />
             : <LoginForm />
           }
